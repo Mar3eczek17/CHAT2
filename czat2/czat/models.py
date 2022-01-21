@@ -9,7 +9,7 @@ class Wiadomosc(models.Model):
 
     """Klasa reprezentująca wiadomość w systemie"""
     tekst = models.CharField('treść wiadomości', max_length=250)
-    data_pub = models.DateTimeField('data publikacji', auto_now_add=True)
+    data_pub = models.DateTimeField('data publikacji')
     autor = models.ForeignKey(User)
 
     class Meta:  # ustawienia dodatkowe
