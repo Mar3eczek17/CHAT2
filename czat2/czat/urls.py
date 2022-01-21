@@ -10,6 +10,7 @@ from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 from django.views.generic import ListView
 from czat.models import Wiadomosc
+from django.views.generic import DeleteView
 
 app_name = 'czat'  # przestrzeń nazw aplikacji
 urlpatterns = [
@@ -34,4 +35,15 @@ urlpatterns = [
         views.DodajWiadomosc.as_view(),
         login_url='/loguj'),
         name='dodaj'),
+    url(r'^edytuj/(?P<pk>\d+)/', login_required(
+        views.EdytujWiadomosc.as_view(),
+        login_url='/loguj'),
+        name='edytuj'),
+    url(r'^usun/(?P<pk>\d+)/', login_required(
+        DeleteView.as_view(
+            model=Wiadomosc,
+            template_name='czat/wiadomosc_usun.html',
+            success_url='/wiadomosci'),
+        login_url='/loguj'),
+        name='usun'),
 ]
